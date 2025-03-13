@@ -1,5 +1,3 @@
----
-
 # 🚀 **Ultimate Guide to cgroups v2 in Linux**  
 
 ### 🧐 **What are cgroups v2?**  
@@ -17,31 +15,31 @@
 
 ## ⚡ **Preferred Method (Tested & Works Best!)**  
 
-### 1️⃣ **Create a cgroup named `subscriptionflow` for CPU and Memory control**  
+### 1️⃣ **Create a cgroup named `sugarcrm` for CPU and Memory control**  
 ```bash
-sudo cgcreate -g cpuset,memory:subscriptionflow
+sudo cgcreate -g cpuset,memory:sugarcrm
 ```
 
 ### 2️⃣ **Set CPU and Memory Limits**  
 🔹 **Limit CPU to specific cores (0–14, meaning 15 CPUs)**  
 ```bash
-sudo cgset -r cpuset.cpus="0-14" subscriptionflow
+sudo cgset -r cpuset.cpus="0-14" sugarcrm
 ```
 🔹 **Assign memory nodes (usually 0 for a single socket CPU machine)**  
 ```bash
-sudo cgset -r cpuset.mems="0" subscriptionflow
+sudo cgset -r cpuset.mems="0" sugarcrm
 ```
 🔹 **Limit memory usage to 60GB**  
 ```bash
-sudo cgset -r memory.max=64424509440 subscriptionflow
+sudo cgset -r memory.max=64424509440 sugarcrm
 ```
 
 ### 3️⃣ **Run a Go application inside this cgroup**  
 ```bash
-sudo cgexec -g cpuset,memory:subscriptionflow /usr/local/go/bin/go run /var/www/html/subscriptionflow/scheduler.go >> /dev/null 2>&1
+sudo cgexec -g cpuset,memory:sugarcrm /usr/local/go/bin/go run /var/www/html/sugarcrm/scheduler.go >> /dev/null 2>&1
 ```
 ```bash
-sudo cgexec -g cpuset,memory:subscriptionflow /var/www/html/subscriptionflow/bin/scheduler >> /dev/null 2>&1
+sudo cgexec -g cpuset,memory:sugarcrm /var/www/html/sugarcrm/bin/scheduler >> /dev/null 2>&1
 ```
 ✅ **This ensures the application runs within the defined resource limits!**  
 
